@@ -66,6 +66,18 @@ polynomial& polynomial::operator=(const polynomial &other){
     return *this;
 }
 
+polynomial polynomial::operator*(const int num)const{
+    polynomial result = *this;
+    for(auto &[pow1, coeff1]: result._terms) { 
+            coeff1*=num;
+        }
+    return result;
+}
+
+    polynomial operator*(int num , const polynomial &poly){
+        return (poly*num);
+    }
+
 polynomial& polynomial::operator*(const polynomial &other) {
     std::vector<std::pair<power, coeff>>result; 
 
@@ -74,10 +86,7 @@ polynomial& polynomial::operator*(const polynomial &other) {
             result.push_back({pow1+pow2, coeff1* coeff2});
         }
     }
-  //  print_vector(result);
-
     sort(result) ;
-    //print_vector(result);
     std::vector<std::pair<power, coeff>>combine; 
     for(size_t i = 0; i <result.size(); ++i) { 
         if(i+1 < result.size() && result[i].first == result[i+1].first) { 
@@ -87,13 +96,10 @@ polynomial& polynomial::operator*(const polynomial &other) {
             combine.push_back(result[i]);
         }
     }
-    //print_vector(combine);
-
     _terms = {};
     for (const auto &[pow, coef] : combine) {
         if (coef != 0) _terms.push_back({pow, coef});
     }
-    //this->print();
     return *this;
 }
 
@@ -130,12 +136,36 @@ polynomial& polynomial::operator+(const polynomial &other){
         _terms = result;
     return *this;
 }
+polynomial polynomial::operator+(const int num)const{
+    polynomial result = *this;
+    for(auto &[pow1, coeff1]: result._terms) { 
+        if(pow1 ==0) { 
+            coeff1+=num;
+        }
+    }
+    return result;
+}
 
+    polynomial operator+(int num , const polynomial &poly){
+        return (poly + num);
+    }
 
 polynomial& polynomial::operator%(const polynomial &other){
     return *this;
-
 }
+polynomial polynomial::operator%(const int num)const{
+    polynomial result = *this;
+    // for(auto &[pow1, coeff1]: result._terms) { 
+    //     if(pow1 ==0) { 
+    //         coeff1+=num;
+    //     }
+    // }
+    return result;
+}
+
+    polynomial operator%(int num , const polynomial &poly){
+        return (poly % num);
+    }
 
 size_t polynomial::find_degree_of(){
     return 0; 

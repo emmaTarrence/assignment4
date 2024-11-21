@@ -63,9 +63,18 @@ public:
      * A reference to the copied polynomial
      */
     polynomial &operator=(const polynomial &other);
+
     polynomial &operator*(const polynomial &other);
+    polynomial operator*(const int)const; 
+    friend polynomial operator*(int num , const polynomial &poly);
+
     polynomial &operator+(const polynomial &other);
+     polynomial operator+(const int)const; 
+    friend polynomial operator+(int num , const polynomial &poly);
+
     polynomial &operator%(const polynomial &other);
+    polynomial operator%(const int)const; 
+    friend polynomial operator%(int num , const polynomial &poly);
 
 
     /**

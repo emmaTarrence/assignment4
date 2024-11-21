@@ -47,11 +47,28 @@ int main()
     p3.print();
 
 
-        polynomial p5(poly_input.begin(), poly_input.end());
+    polynomial p5(poly_input.begin(), poly_input.end());
     polynomial p6(poly_input.begin(), poly_input.end());
     printf("4: ");
     polynomial p4 = p5 + p6;
     p4.print();
+
+    polynomial in1(poly_input.begin(), poly_input.end());
+
+    polynomial out1 = in1 * 2;
+    out1.print();
+
+    polynomial in2(poly_input.begin(), poly_input.end());
+    polynomial out2 = 2 * in2;
+    out2.print();
+
+
+   polynomial in3(poly_input.begin(), poly_input.end());
+   polynomial out3 = 2 + in3;
+   polynomial in4(poly_input.begin(), poly_input.end());
+   polynomial out4 = in4 + 3;
+    out3.print();
+    out4.print();
 
 
     // std::optional<double> result = poly_test(p1, p2, solution);
