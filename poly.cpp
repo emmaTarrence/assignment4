@@ -178,7 +178,7 @@ std::vector<std::pair<power, coeff>> polynomial::canonical_form() const {
     std::vector<std::pair<power, coeff>> result = _terms;
     // If there are no terms, return an empty vector
     if (result.empty()) {
-        return {};
+        return {{0,0}};
     }
     
     // Sort by descending powers

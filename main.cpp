@@ -89,18 +89,27 @@ int main()
     
     std::vector<std::pair<power, coeff>> empty = {};
 
-        polynomial  can3(empty.begin(), empty.end());
+    polynomial  can3(empty.begin(), empty.end());
     auto result3 = can3.canonical_form();
-    std::vector<term> expected3 = {};
+    std::vector<term> expected3 = {{0,0}};
     assert(result3 == expected3);
-    // std::optional<double> result = poly_test(p1, p2, solution);
 
-    //  if (result.has_value())
-    //  {
-    //      std::cout << "Passed test, took " << result.value()/1000 << " seconds" << std::endl;
-    //  } 
-    //  else 
-    //  {
-    //      std::cout << "Failed test" << std::endl;
-    //  }
+    std::vector<std::pair<power, coeff>> zero = {{0,0}};
+
+    polynomial  can4(zero.begin(), zero.end());
+    auto result4 = can4.canonical_form();
+    std::vector<term> expected4 = {{0,0}};
+    assert(result4 == expected4);
+
+
+    std::optional<double> result = poly_test(p1, p2, solution);
+
+     if (result.has_value())
+     {
+         std::cout << "Passed test, took " << result.value()/1000 << " seconds" << std::endl;
+     } 
+     else 
+     {
+         std::cout << "Failed test" << std::endl;
+     }
 }
