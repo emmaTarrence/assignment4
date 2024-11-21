@@ -175,8 +175,14 @@ size_t polynomial::find_degree_of(){
 }
 
 std::vector<std::pair<power, coeff>> polynomial::canonical_form() const {
-    std::vector<std::pair<power,coeff>> result = _terms;
-    sort(result);
-    return result;
+    std::vector<std::pair<power, coeff>> result = _terms;
+    // If there are no terms, return an empty vector
+    if (result.empty()) {
+        return {};
+    }
+    
+    // Sort by descending powers
+    sort(result);    
+    return result; // Return the sorted vector
 }
 

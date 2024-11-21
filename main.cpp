@@ -2,7 +2,7 @@
 #include <chrono>
 #include <optional>
 #include <vector>
-
+#include <cassert>
 #include "poly.h"
 
 std::optional<double> poly_test(polynomial& p1,
@@ -72,6 +72,27 @@ int main()
     size_t deg = p3.find_degree_of();
     printf("%ld\n", deg);
 
+
+
+    using term = std::pair<power, coeff>;
+    polynomial can1(poly_input.begin(), poly_input.end());
+    auto result1 = can1.canonical_form();
+    std::vector<term> expected1 = {{1,1}, {0,1}};
+    assert(result1 == expected1);
+
+    using term = std::pair<power, coeff>;
+    polynomial can2(solution.begin(), solution.end());
+    auto result2 = can2.canonical_form();
+    std::vector<term> expected2 = {{2,1}, {1,2}, {0,1}};
+    assert(result2 == expected2);
+
+    
+    std::vector<std::pair<power, coeff>> empty = {};
+
+        polynomial  can3(empty.begin(), empty.end());
+    auto result3 = can3.canonical_form();
+    std::vector<term> expected3 = {};
+    assert(result3 == expected3);
     // std::optional<double> result = poly_test(p1, p2, solution);
 
     //  if (result.has_value())
