@@ -78,7 +78,7 @@ polynomial polynomial::operator*(const int num)const{
         return (poly*num);
     }
 
-polynomial& polynomial::operator*(const polynomial &other) {
+polynomial polynomial::operator*(const polynomial &other) {
     std::vector<std::pair<power, coeff>>result; 
 
     for(const auto &[pow1, coeff1]: _terms) { 
@@ -103,7 +103,7 @@ polynomial& polynomial::operator*(const polynomial &other) {
     return *this;
 }
 
-polynomial& polynomial::operator+(const polynomial &other){
+polynomial polynomial::operator+(const polynomial &other){
     std::vector<std::pair<power, coeff>>result; 
     size_t i =0, j = 0; 
     while(i< _terms.size() && j < other._terms.size()) { 
@@ -150,7 +150,7 @@ polynomial polynomial::operator+(const int num)const{
         return (poly + num);
     }
 
-polynomial& polynomial::operator%(const polynomial &other){
+polynomial polynomial::operator%(const polynomial &other){
     return *this;
 }
 polynomial polynomial::operator%(const int num)const{
