@@ -64,11 +64,11 @@ public:
      */
     polynomial &operator=(const polynomial &other);
 
-    polynomial operator*(const polynomial &other);
+    polynomial operator*(const polynomial &other)const;
     polynomial operator*(const int)const; 
     friend polynomial operator*(int num , const polynomial &poly);
 
-    polynomial operator+(const polynomial &other);
+    polynomial operator+(const polynomial &other)const;
      polynomial operator+(const int)const; 
     friend polynomial operator+(int num , const polynomial &poly);
 

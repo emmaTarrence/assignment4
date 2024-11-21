@@ -78,8 +78,8 @@ polynomial polynomial::operator*(const int num)const{
         return (poly*num);
     }
 
-polynomial polynomial::operator*(const polynomial &other) {
-    std::vector<std::pair<power, coeff>>result; 
+polynomial polynomial::operator*(const polynomial &other)const {
+    std::vector<std::pair<size_t, int>>result; 
 
     for(const auto &[pow1, coeff1]: _terms) { 
         for(const auto &[pow2, coeff2]: other._terms){ 
@@ -96,15 +96,15 @@ polynomial polynomial::operator*(const polynomial &other) {
             combine.push_back(result[i]);
         }
     }
-    _terms = {};
+    polynomial product;
     for (const auto &[pow, coef] : combine) {
-        if (coef != 0) _terms.push_back({pow, coef});
+        if (coef != 0) product._terms.push_back({pow, coef});
     }
-    return *this;
+    return product;
 }
 
-polynomial polynomial::operator+(const polynomial &other){
-    std::vector<std::pair<power, coeff>>result; 
+polynomial polynomial::operator+(const polynomial &other)const{
+    std::vector<std::pair<size_t, int>>result; 
     size_t i =0, j = 0; 
     while(i< _terms.size() && j < other._terms.size()) { 
         auto [pow1, coeff1] = _terms[i];
@@ -133,8 +133,9 @@ polynomial polynomial::operator+(const polynomial &other){
             result.push_back(other._terms[j]);
             j++;
         }
-        _terms = result;
-    return *this;
+        polynomial sum;
+        sum._terms = result;
+    return sum;
 }
 polynomial polynomial::operator+(const int num)const{
     polynomial result = *this;
@@ -168,10 +169,14 @@ polynomial polynomial::operator%(const int num)const{
     }
 
 size_t polynomial::find_degree_of(){
-    return 0; 
+    sort(_terms);
+    auto [pow, coeff] = _terms[0];
+    return pow;
 }
 
 std::vector<std::pair<power, coeff>> polynomial::canonical_form() const {
-    return {}; // Return an empty vector for now
+    std::vector<std::pair<power,coeff>> result = _terms;
+    sort(result);
+    return result;
 }
 

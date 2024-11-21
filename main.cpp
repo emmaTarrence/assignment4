@@ -69,7 +69,8 @@ int main()
    polynomial out4 = in4 + 3;
     out3.print();
     out4.print();
-
+    size_t deg = p3.find_degree_of();
+    printf("%ld\n", deg);
 
     // std::optional<double> result = poly_test(p1, p2, solution);
 
