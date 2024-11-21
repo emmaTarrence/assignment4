@@ -101,6 +101,12 @@ int main()
     std::vector<term> expected4 = {{0,0}};
     assert(result4 == expected4);
 
+    std::vector<std::pair<power, coeff>> two = {{2,0}};
+
+    polynomial  can5(two.begin(), two.end());
+    auto result5 = can5.canonical_form();
+    std::vector<term> expected5 = {{0,0}};
+    assert(result5 == expected5);
 
     std::optional<double> result = poly_test(p1, p2, solution);
 
