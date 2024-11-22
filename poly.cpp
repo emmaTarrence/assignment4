@@ -186,10 +186,30 @@ polynomial polynomial::operator%(const polynomial &other){
         for (const auto &[pow, coef] : result) {
         if (coef != 0) mult._terms.push_back({pow, coef});
     }
-
+    in1.print();
+    printf("mult: ");
+    mult.print();
+    printf( "\n");
     polynomial sub = mult * other;
     sub = sub * -1; 
-    polynomial out = sub+ *this;
+    printf("sub: ");
+    sub.print();
+    printf( "\n");
+    polynomial out = in1 + sub;
+
+    std::vector<std::pair<power, coeff>> outVec = out.canonical_form();
+    auto [powOut, coeffOut] = outVec.front(); 
+    printf("powOut : %ld\n", powOut);
+    printf("pow2 : %ld\n", pow2);
+
+    printf("coeffOut : %d\n", coeffOut);
+    printf("coeff2 : %d\n", coeff2);
+
+    if((powOut > pow2) || ((powOut == pow2) && (coeff2 <= coeffOut))){ 
+        printf("in if");
+        return out % in2;
+    }
+    out.print();
     return out;
     // size_t inputDeg = input.find_degree_of();
     // size_t dividedDeg = divided.find_degree_of();
