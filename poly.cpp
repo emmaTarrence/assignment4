@@ -135,7 +135,7 @@ polynomial polynomial::operator+(const polynomial &other)const{
         sort(result);
 std::vector<std::pair<power, coeff>> combine; 
 for (size_t i = 0; i < result.size(); ++i) {
-    if (i + 1 < result.size() && result[i].first == result[i + 1].first && result[i].second != 0) {
+    if (i + 1 < result.size() && result[i].first == result[i + 1].first ) {
         result[i + 1].second += result[i].second;
     } else {
         combine.push_back(result[i]);
