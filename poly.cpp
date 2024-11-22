@@ -196,7 +196,7 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
         for (const auto &[pow, coef] : result) {
         if (coef != 0) mult._terms.push_back({pow, coef});
     }
-//    in1.print();
+   //in1.print();
     // printf("mult: ");
     // mult.print();
     // printf( "\n");
@@ -216,7 +216,7 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     // printf("coeff2 : %d\n", coeff2);
     polynomial trial = out + (-1 *in2); 
     std::vector<std::pair<power, coeff>> trial1 = trial.canonical_form();
-    auto [powTrial, coeffTrial] = trial1.front(); 
+   // auto [powTrial, coeffTrial] = trial1.front(); 
     // out.print();
     // printf("-");
     // in2.print();
@@ -224,8 +224,8 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     // trial.print(); 
     
 
-    if((powOut > pow2) || ((powOut == pow2) && (coeffTrial > 0))){ 
-        // out.print();
+    if((powOut >= pow2)){ 
+     //   out.print();
         // printf("in if");
         return out % in2;
     }
