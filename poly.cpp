@@ -150,6 +150,7 @@ polynomial polynomial::operator+(const int num)const{
     polynomial result = *this;
     for(auto &[pow1, coeff1]: result._terms) { 
         if(pow1 ==0) { 
+            inwhile = 1;
             coeff1+=num;
         }
     }
@@ -230,10 +231,7 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
 }
 
 size_t polynomial::find_degree_of(){
-    print_vector(_terms);
     sort(_terms);
-    print_vector(_terms);
-
     auto [pow, coeff] = _terms[0];
     return pow;
 }
