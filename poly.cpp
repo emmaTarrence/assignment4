@@ -141,7 +141,6 @@ for (size_t i = 0; i < result.size(); ++i) {
         combine.push_back(result[i]);
     }
 }
-    print_vector(combine);
         polynomial sum;
         sum._terms = combine;
     return sum;
@@ -149,12 +148,9 @@ for (size_t i = 0; i < result.size(); ++i) {
 polynomial polynomial::operator+(const int num)const{
     bool inwhile = 0;
     polynomial result = *this;
-    printf("here");
     for(auto &[pow1, coeff1]: result._terms) { 
-        printf("for\n");
         if(pow1 ==0) { 
             inwhile = 1;
-            printf("in");
             coeff1+=num;
         }
     }
@@ -169,17 +165,94 @@ polynomial polynomial::operator+(const int num)const{
     }
 
 polynomial polynomial::operator%(const polynomial &other){
-    return *this;
+    std::vector<std::pair<size_t, int>> result;
+    
+    polynomial in1 = *this; 
+    polynomial in2 = other;
+
+    std::vector<std::pair<power, coeff>> can1 = in1.canonical_form();
+    std::vector<std::pair<power, coeff>> can2 = in2.canonical_form();
+
+    auto [pow1, coeff1] = can1.front(); 
+    auto [pow2, coeff2] = can2.front(); 
+    
+    if(coeff2 != 0) { 
+        size_t result_pow = pow1-pow2;
+        int result_coeff = coeff1/coeff2; 
+        result.push_back({result_pow, result_coeff});
+    }
+
+    polynomial mult;
+        for (const auto &[pow, coef] : result) {
+        if (coef != 0) mult._terms.push_back({pow, coef});
+    }
+
+    polynomial sub = mult * other;
+    sub = sub * -1; 
+    polynomial out = sub+ *this;
+    return out;
+    // size_t inputDeg = input.find_degree_of();
+    // size_t dividedDeg = divided.find_degree_of();
+
+    // if(inputDeg > dividedDeg) { 
+    //     return input; 
+    // }
+
+    // for(int i = inputDeg; i >= dividedDeg; i--) { 
+    //     double coeff = remainder[i]/;
+    // // }
+    // printf( "before while \n");
+    // printf("input empty: %d\n", input._terms.empty());
+    // printf("divided empty: %d\n", divided._terms.empty());
+    // while(!input._terms.empty() && !divided._terms.empty() && input._terms[0].first >= divided._terms[0].first) {
+    //     auto[pow1, coeff1] = input._terms[0];
+    //     auto[pow2, coeff2] = divided._terms[0];
+        
+    //     size_t powerDiff = pow1- pow2; 
+    //     printf("power diff: %ld\n", powerDiff);
+    //     int coeffDiff = coeff1 / coeff2;
+    //     printf("coeffDiff: %d\n", coeffDiff);
+
+    //     polynomial term;
+    //     term._terms.push_back({powerDiff, coeffDiff});
+
+    //     divided = divided + term;
+
+    //     polynomial sub = divided * term; 
+    //     // sub = sub * -1;
+    //     input = input + (sub * -1); 
+    //     input.print();
+    //     term.print();
+    //     break;
+    // }
+    // return input;
 }
 polynomial polynomial::operator%(const int num)const{
-    polynomial result = *this;
-    // for(auto &[pow1, coeff1]: result._terms) { 
-    //     if(pow1 ==0) { 
-    //         coeff1+=num;
-    //     }
+    // polynomial result = *this;
+    // polynomial divided; 
+    // printf( "before while \n");
+    // while(!result._terms.empty() && result._terms[0].first >= divided._terms[0].first) {
+    //     auto[pow1, coeff1] = result._terms[0];
+    //     auto[pow2, coeff2] = divided._terms[0];
+        
+    //     size_t powerDiff = pow1- pow2; 
+    //     printf("power diff: %ld", powerDiff);
+    //     int coeffDiff = coeff1 / coeff2;
+    //     printf("coeffDiff: %d\n", coeffDiff);
+
+    //     polynomial term;
+    //     term._terms.push_back({powerDiff, coeffDiff});
+
+    //     divided = divided + term;
+
+    //     polynomial sub = divided * term; 
+    //     sub = sub * -1;
+    //     result = result + sub; 
+
     // }
-    return result;
+    return *this;
 }
+
 
     polynomial operator%(int num , const polynomial &poly){
         return (poly % num);
