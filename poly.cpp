@@ -221,7 +221,7 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     // trial.print(); 
     
 
-    if((powOut > pow2) || ((powOut == pow2) && (coeffTrial >= 0))){ 
+    if((powOut > pow2) || ((powOut == pow2) && (coeffTrial > 0))){ 
         // out.print();
         // printf("in if");
         return out % in2;
