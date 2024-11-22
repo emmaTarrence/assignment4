@@ -44,10 +44,10 @@ int main() {
     polynomial p_mod4 = p6 % p1; // Expected result: x
     p_mod4.print();
 
-    // // Edge Case 4: Dividing by a root polynomial (Expected result: 0)
-    // std::cout << "(x - 1) % (x - 1) = ";
-    // polynomial p_mod5 = p2 % p2; // Expected result: 0
-    // p_mod5.print();
+    // Edge Case 4: Dividing by a root polynomial (Expected result: 0)
+    std::cout << "(x - 1) % (x - 1) = ";
+    polynomial p_mod5 = p2 % p2; // Expected result: 0
+    p_mod5.print();
 
     // Verify the results
     std::vector<term> expected_mod = {{0, -1}}; // Expected result: -1
@@ -58,9 +58,9 @@ int main() {
     auto p_mod1_canonical = p_mod1.canonical_form();
     assert(p_mod1_canonical == expected_mod1);
 
-    // std::vector<term> expected_mod2 = {{0, 0}}; // Expected result: 0
-    // auto p_mod2_canonical = p_mod2.canonical_form();
-    // assert(p_mod2_canonical == expected_mod2);
+    std::vector<term> expected_mod2 = {{0, 0}}; // Expected result: 0
+    auto p_mod2_canonical = p_mod2.canonical_form();
+    assert(p_mod2_canonical == expected_mod2);
 
     // std::vector<term> expected_mod3 = {{0, 5}}; // Expected result: 5 (constant)
     // auto p_mod3_canonical = p_mod3.canonical_form();
@@ -70,9 +70,9 @@ int main() {
     auto p_mod4_canonical = p_mod4.canonical_form();
     assert(p_mod4_canonical == expected_mod4);
 
-    // std::vector<term> expected_mod5 = {{0, 0}}; // Expected result: 0
-    // auto p_mod5_canonical = p_mod5.canonical_form();
-    // assert(p_mod5_canonical == expected_mod5);
+    std::vector<term> expected_mod5 = {{0, 0}}; // Expected result: 0
+    auto p_mod5_canonical = p_mod5.canonical_form();
+    assert(p_mod5_canonical == expected_mod5);
 
     std::cout << "All tests passed!" << std::endl;
     return 0;

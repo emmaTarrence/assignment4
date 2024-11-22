@@ -193,15 +193,15 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
         for (const auto &[pow, coef] : result) {
         if (coef != 0) mult._terms.push_back({pow, coef});
     }
-   in1.print();
-    printf("mult: ");
-    mult.print();
-    printf( "\n");
+//    in1.print();
+    // printf("mult: ");
+    // mult.print();
+    // printf( "\n");
     polynomial sub = mult * other;
     sub = sub * -1; 
-    printf("sub: ");
-    sub.print();
-    printf( "\n");
+    // printf("sub: ");
+    // sub.print();
+    // printf( "\n");
     polynomial out = in1 + sub;
 
     std::vector<std::pair<power, coeff>> outVec = out.canonical_form();
@@ -211,10 +211,19 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
 
     // printf("coeffOut : %d\n", coeffOut);
     // printf("coeff2 : %d\n", coeff2);
+    polynomial trial = out + (-1 *in2); 
+    std::vector<std::pair<power, coeff>> trial1 = trial.canonical_form();
+    auto [powTrial, coeffTrial] = trial1.front(); 
+    // out.print();
+    // printf("-");
+    // in2.print();
+    // printf("=");
+    // trial.print(); 
+    
 
-    if((powOut > pow2) || ((powOut == pow2) && (coeff2 <= coeffOut))){ 
-        out.print();
-        printf("in if");
+    if((powOut > pow2) || ((powOut == pow2) && (coeffTrial >= 0))){ 
+        // out.print();
+        // printf("in if");
         return out % in2;
     }
    // out.print();
@@ -255,36 +264,6 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     // }
     // return input;
 }
-polynomial polynomial::operator%(const int num)const{
-    // polynomial result = *this;
-    // polynomial divided; 
-    // printf( "before while \n");
-    // while(!result._terms.empty() && result._terms[0].first >= divided._terms[0].first) {
-    //     auto[pow1, coeff1] = result._terms[0];
-    //     auto[pow2, coeff2] = divided._terms[0];
-        
-    //     size_t powerDiff = pow1- pow2; 
-    //     printf("power diff: %ld", powerDiff);
-    //     int coeffDiff = coeff1 / coeff2;
-    //     printf("coeffDiff: %d\n", coeffDiff);
-
-    //     polynomial term;
-    //     term._terms.push_back({powerDiff, coeffDiff});
-
-    //     divided = divided + term;
-
-    //     polynomial sub = divided * term; 
-    //     sub = sub * -1;
-    //     result = result + sub; 
-
-    // }
-    return *this;
-}
-
-
-    polynomial operator%(int num , const polynomial &poly){
-        return (poly % num);
-    }
 
 size_t polynomial::find_degree_of(){
     sort(_terms);
