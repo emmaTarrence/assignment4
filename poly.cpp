@@ -135,7 +135,7 @@ polynomial polynomial::operator+(const polynomial &other)const{
         sort(result);
 std::vector<std::pair<power, coeff>> combine; 
 for (size_t i = 0; i < result.size(); ++i) {
-    if (i + 1 < result.size() && result[i].first == result[i + 1].first) {
+    if (i + 1 < result.size() && result[i].first == result[i + 1].first && result[i].second != 0) {
         result[i + 1].second += result[i].second;
     } else {
         combine.push_back(result[i]);
@@ -150,7 +150,6 @@ polynomial polynomial::operator+(const int num)const{
     polynomial result = *this;
     for(auto &[pow1, coeff1]: result._terms) { 
         if(pow1 ==0) { 
-            inwhile = 1;
             coeff1+=num;
         }
     }
@@ -228,45 +227,13 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     }
    // out.print();
     return out;
-    // size_t inputDeg = input.find_degree_of();
-    // size_t dividedDeg = divided.find_degree_of();
-
-    // if(inputDeg > dividedDeg) { 
-    //     return input; 
-    // }
-
-    // for(int i = inputDeg; i >= dividedDeg; i--) { 
-    //     double coeff = remainder[i]/;
-    // // }
-    // printf( "before while \n");
-    // printf("input empty: %d\n", input._terms.empty());
-    // printf("divided empty: %d\n", divided._terms.empty());
-    // while(!input._terms.empty() && !divided._terms.empty() && input._terms[0].first >= divided._terms[0].first) {
-    //     auto[pow1, coeff1] = input._terms[0];
-    //     auto[pow2, coeff2] = divided._terms[0];
-        
-    //     size_t powerDiff = pow1- pow2; 
-    //     printf("power diff: %ld\n", powerDiff);
-    //     int coeffDiff = coeff1 / coeff2;
-    //     printf("coeffDiff: %d\n", coeffDiff);
-
-    //     polynomial term;
-    //     term._terms.push_back({powerDiff, coeffDiff});
-
-    //     divided = divided + term;
-
-    //     polynomial sub = divided * term; 
-    //     // sub = sub * -1;
-    //     input = input + (sub * -1); 
-    //     input.print();
-    //     term.print();
-    //     break;
-    // }
-    // return input;
 }
 
 size_t polynomial::find_degree_of(){
+    print_vector(_terms);
     sort(_terms);
+    print_vector(_terms);
+
     auto [pow, coeff] = _terms[0];
     return pow;
 }

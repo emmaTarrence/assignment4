@@ -1,6 +1,6 @@
 # Compiler and flags
 CC=g++
-CFLAGS=-std=c++17 -Wall -g
+CFLAGS=-std=c++17 -Wall -g -O0
 
 # The source files
 ALL_SRC=$(wildcard *.cpp)

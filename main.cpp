@@ -25,6 +25,10 @@ int main() {
     polynomial p_mod = p1 % p2; // Expected result: -1
     p_mod.print();
 
+    printf("power: %ld\n", p1.find_degree_of());
+    printf("power: %ld\n", p2.find_degree_of());
+    printf("power: %ld\n", p5.find_degree_of());
+
     std::cout << "(2x^3 + x^2 - x - 1) % (x - 1) = ";
     polynomial p_mod1 = p3 % p2; // Expected result: -1
     p_mod1.print();
@@ -32,12 +36,13 @@ int main() {
    // Edge Case 1: Zero polynomial modulus with another polynomial (Expected result: 0)
    std::cout << "0 % (x - 1) = ";
     polynomial p_mod2 = p4 % p2; // Expected result: 0
+
     p_mod2.print();
 
     // // Edge Case 2: Modulus with constant polynomial (Expected result: 5)
-    // std::cout << "5 % (x - 1) = ";
-    // polynomial p_mod3 = p5 % p2; // Expected result: 5 (constant)
-    // p_mod3.print();
+    std::cout << "5 % (x - 1) = ";
+    polynomial p_mod3 = p5 % p2; // Expected result: 5 (constant)
+    p_mod3.print();
 
     // Edge Case 3: Dividing by polynomial of degree higher than dividend (Expected result: x - 1)
     std::cout << "(x) % (x^2 - x - 1) = ";
@@ -62,9 +67,9 @@ int main() {
     auto p_mod2_canonical = p_mod2.canonical_form();
     assert(p_mod2_canonical == expected_mod2);
 
-    // std::vector<term> expected_mod3 = {{0, 5}}; // Expected result: 5 (constant)
-    // auto p_mod3_canonical = p_mod3.canonical_form();
-    // assert(p_mod3_canonical == expected_mod3);
+    std::vector<term> expected_mod3 = {{0, 5}}; // Expected result: 5 (constant)
+    auto p_mod3_canonical = p_mod3.canonical_form();
+    assert(p_mod3_canonical == expected_mod3);
 
     std::vector<term> expected_mod4 = {{1, 1}}; // Expected result: x
     auto p_mod4_canonical = p_mod4.canonical_form();
