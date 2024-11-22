@@ -142,6 +142,9 @@ for (size_t i = 0; i < result.size(); ++i) {
     }
 }
         polynomial sum;
+         for (const auto &[pow, coef] : result) {
+        if (coef != 0) sum._terms.push_back({pow, coef});
+    }
         sum._terms = combine;
     return sum;
 }
