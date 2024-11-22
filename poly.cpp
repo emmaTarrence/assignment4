@@ -104,36 +104,26 @@ polynomial polynomial::operator*(const polynomial &other)const {
 }
 
 polynomial polynomial::operator+(const polynomial &other)const{
-
     std::vector<std::pair<size_t, int>>result; 
     
     size_t i =0, j = 0; 
     while(i< _terms.size() && j < other._terms.size()) { 
         auto [pow1, coeff1] = _terms[i];
         auto [pow2, coeff2] = other._terms[j];
-// printf("power1: %ld\n", pow1);
-// printf("power2: %ld\n", pow2);
         if(pow1== pow2) { 
-            
-            // printf("co1: %d\n", coeff1);
-            // printf("co2: %d\n", coeff2);
             result.push_back({pow1, coeff1 + coeff2});
             i++;
             j++; 
         }
         else if(pow1< pow2) { 
-            // printf("in less\n");
             result.push_back({pow1, coeff1});
             i++;
         }
         else{
-            // printf("in else\n");
-            // printf("pushed: %ld, %d", pow2, coeff2);
             result.push_back({pow2, coeff2});
             j++;
         }
         }
-       // print_vector(result);
         while(i< _terms.size()){
             result.push_back(_terms[i]);
             i++;
@@ -142,7 +132,6 @@ polynomial polynomial::operator+(const polynomial &other)const{
             result.push_back(other._terms[j]);
             j++;
         }
-     //   print_vector(result);
         sort(result);
 std::vector<std::pair<power, coeff>> combine; 
 for (size_t i = 0; i < result.size(); ++i) {
@@ -158,11 +147,19 @@ for (size_t i = 0; i < result.size(); ++i) {
     return sum;
 }
 polynomial polynomial::operator+(const int num)const{
+    bool inwhile = 0;
     polynomial result = *this;
+    printf("here");
     for(auto &[pow1, coeff1]: result._terms) { 
+        printf("for\n");
         if(pow1 ==0) { 
+            inwhile = 1;
+            printf("in");
             coeff1+=num;
         }
+    }
+    if(!inwhile) { 
+        result._terms.push_back({0, num});
     }
     return result;
 }
