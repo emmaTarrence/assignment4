@@ -187,26 +187,26 @@ polynomial polynomial::operator%(const polynomial &other){
         if (coef != 0) mult._terms.push_back({pow, coef});
     }
     in1.print();
-    printf("mult: ");
-    mult.print();
-    printf( "\n");
+    // printf("mult: ");
+    // mult.print();
+    // printf( "\n");
     polynomial sub = mult * other;
     sub = sub * -1; 
-    printf("sub: ");
-    sub.print();
-    printf( "\n");
+    // printf("sub: ");
+    // sub.print();
+    // printf( "\n");
     polynomial out = in1 + sub;
 
     std::vector<std::pair<power, coeff>> outVec = out.canonical_form();
     auto [powOut, coeffOut] = outVec.front(); 
-    printf("powOut : %ld\n", powOut);
-    printf("pow2 : %ld\n", pow2);
+    // printf("powOut : %ld\n", powOut);
+    // printf("pow2 : %ld\n", pow2);
 
-    printf("coeffOut : %d\n", coeffOut);
-    printf("coeff2 : %d\n", coeff2);
+    // printf("coeffOut : %d\n", coeffOut);
+    // printf("coeff2 : %d\n", coeff2);
 
     if((powOut > pow2) || ((powOut == pow2) && (coeff2 <= coeffOut))){ 
-        printf("in if");
+        // printf("in if");
         return out % in2;
     }
     out.print();
