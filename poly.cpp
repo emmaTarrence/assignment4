@@ -168,6 +168,8 @@ polynomial polynomial::operator+(const int num)const{
     }
 
 polynomial polynomial::operator%(const polynomial &other){
+ //   std::cout << "in" << std::endl;
+    // other.print();
 if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     polynomial zero;
     return zero;
@@ -181,15 +183,20 @@ if(other > *this) {
     
     polynomial in1 = *this; 
     polynomial in2 = other;
+    // other.print();
+    // in2.print();
+    std::vector<std::pair<power, coeff>> can1 = this->canonical_form();
+    // std::cout << can1 << std::endl;
+    std::vector<std::pair<power, coeff>> can2 = other.canonical_form();
+    print_vector(can2);
 
-    std::vector<std::pair<power, coeff>> can1 = in1.canonical_form();
-    std::vector<std::pair<power, coeff>> can2 = in2.canonical_form();
     sort(can1);
     sort(can2);
 
     auto [pow1, coeff1] = can1.front(); 
     auto [pow2, coeff2] = can2.front(); 
     if(pow1 < pow2) { 
+       // std::cout << pow1 << "," << pow2 << std::endl;
         return *this;
     }
     if(coeff2 != 0) { 
@@ -202,17 +209,20 @@ if(other > *this) {
         for (const auto &[pow, coef] : result) {
         if (coef != 0) mult._terms.push_back({pow, coef});
     }
-   //in1.print();
-    // printf("mult: ");
-    // mult.print();
-    // printf( "\n");
+//    in1.print();
+//     printf("mult: ");
+//     mult.print();
+//     printf( "\n");
     polynomial sub = mult * other;
     sub = sub * -1; 
     // printf("sub: ");
     // sub.print();
     // printf( "\n");
+    // printf("in 1: ");
+    // in1.print();
+    // printf("out: ");
     polynomial out = in1 + sub;
-
+    // out.print();
     std::vector<std::pair<power, coeff>> outVec = out.canonical_form();
     auto [powOut, coeffOut] = outVec.front(); 
     // printf("powOut : %ld\n", powOut);
@@ -222,7 +232,7 @@ if(other > *this) {
     // printf("coeff2 : %d\n", coeff2);
     polynomial trial = out + (-1 *in2); 
     std::vector<std::pair<power, coeff>> trial1 = trial.canonical_form();
-   // auto [powTrial, coeffTrial] = trial1.front(); 
+  // auto [powTrial, coeffTrial] = trial1.front(); 
     // out.print();
     // printf("-");
     // in2.print();
