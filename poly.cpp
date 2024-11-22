@@ -167,87 +167,122 @@ polynomial polynomial::operator+(const int num)const{
         return (poly + num);
     }
 
-polynomial polynomial::operator%(const polynomial &other){
+// polynomial polynomial::operator%(const polynomial &other){
  //   std::cout << "in" << std::endl;
     // other.print();
-if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
-    polynomial zero;
-    return zero;
-}
+// if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
+//     polynomial zero;
+//     return zero;
+// }
 
-if(other > *this) { 
-    return *this;
-}
+// if(other > *this) { 
+//     return *this;
+// }
 
-    std::vector<std::pair<size_t, int>> result;
+//     std::vector<std::pair<size_t, int>> result;
     
-    polynomial in1 = *this; 
-    polynomial in2 = other;
-    // other.print();
-    // in2.print();
-    std::vector<std::pair<power, coeff>> can1 = this->canonical_form();
-    // std::cout << can1 << std::endl;
-    std::vector<std::pair<power, coeff>> can2 = other.canonical_form();
-    print_vector(can2);
+//     polynomial in1 = *this; 
+//     polynomial in2 = other;
+//     // other.print();
+//     // in2.print();
+//     std::vector<std::pair<power, coeff>> can1 = this->canonical_form();
+//     // std::cout << can1 << std::endl;
+//     std::vector<std::pair<power, coeff>> can2 = other.canonical_form();
+//     print_vector(can2);
 
-    sort(can1);
-    sort(can2);
+//     sort(can1);
+//     sort(can2);
 
-    auto [pow1, coeff1] = can1.front(); 
-    auto [pow2, coeff2] = can2.front(); 
-    if(pow1 < pow2) { 
-       // std::cout << pow1 << "," << pow2 << std::endl;
+//     auto [pow1, coeff1] = can1.front(); 
+//     auto [pow2, coeff2] = can2.front(); 
+//     if(pow1 < pow2) { 
+//        // std::cout << pow1 << "," << pow2 << std::endl;
+//         return *this;
+//     }
+//     if(coeff2 != 0) { 
+//         size_t result_pow = pow1-pow2;
+//         int result_coeff = coeff1/coeff2; 
+//         result.push_back({result_pow, result_coeff});
+//     }
+
+//     polynomial mult;
+//         for (const auto &[pow, coef] : result) {
+//         if (coef != 0) mult._terms.push_back({pow, coef});
+//     }
+// //    in1.print();
+// //     printf("mult: ");
+// //     mult.print();
+// //     printf( "\n");
+//     polynomial sub = mult * other;
+//     sub = sub * -1; 
+//     // printf("sub: ");
+//     // sub.print();
+//     // printf( "\n");
+//     // printf("in 1: ");
+//     // in1.print();
+//     // printf("out: ");
+//     polynomial out = in1 + sub;
+//     // out.print();
+//     std::vector<std::pair<power, coeff>> outVec = out.canonical_form();
+//     auto [powOut, coeffOut] = outVec.front(); 
+//     // printf("powOut : %ld\n", powOut);
+//     // printf("pow2 : %ld\n", pow2);
+
+//     // printf("coeffOut : %d\n", coeffOut);
+//     // printf("coeff2 : %d\n", coeff2);
+//     polynomial trial = out + (-1 *in2); 
+//     std::vector<std::pair<power, coeff>> trial1 = trial.canonical_form();
+//   // auto [powTrial, coeffTrial] = trial1.front(); 
+//     // out.print();
+//     // printf("-");
+//     // in2.print();
+//     // printf("=");
+//     // trial.print(); 
+    
+
+//     if((powOut >= pow2)){ 
+//      //   out.print();
+//         // printf("in if");
+//         return out % in2;
+//     }
+//    // out.print();
+//     return out;
+// }
+polynomial polynomial::operator%(const polynomial &other) {
+    if (other._terms.empty() || (other._terms.size() == 1 && other._terms[0].second == 0)) {
         return *this;
     }
-    if(coeff2 != 0) { 
-        size_t result_pow = pow1-pow2;
-        int result_coeff = coeff1/coeff2; 
-        result.push_back({result_pow, result_coeff});
+
+    polynomial dividend = *this;
+    std::vector<std::pair<power, coeff>> dividend_terms = dividend.canonical_form();
+
+    polynomial divisor = other;
+    std::vector<std::pair<power, coeff>> divisor_terms = divisor.canonical_form();
+
+    polynomial remainder;
+
+    while (!dividend_terms.empty() &&
+           dividend_terms.front().first >= divisor_terms.front().first) {
+        power diff_power = dividend_terms.front().first - divisor_terms.front().first;
+        coeff scale_coeff = dividend_terms.front().second / divisor_terms.front().second;
+
+std::vector<std::pair<power, coeff>> term_vec = {{diff_power, scale_coeff}};
+polynomial term_to_subtract(term_vec.begin(), term_vec.end());
+
+
+        polynomial scaled_divisor = divisor * scale_coeff;
+        for (auto &t : scaled_divisor._terms) {
+            t.first += diff_power;
+        }
+
+        dividend = dividend + (scaled_divisor * -1);
+        dividend_terms = dividend.canonical_form(); // Recompute canonical form
     }
 
-    polynomial mult;
-        for (const auto &[pow, coef] : result) {
-        if (coef != 0) mult._terms.push_back({pow, coef});
-    }
-//    in1.print();
-//     printf("mult: ");
-//     mult.print();
-//     printf( "\n");
-    polynomial sub = mult * other;
-    sub = sub * -1; 
-    // printf("sub: ");
-    // sub.print();
-    // printf( "\n");
-    // printf("in 1: ");
-    // in1.print();
-    // printf("out: ");
-    polynomial out = in1 + sub;
-    // out.print();
-    std::vector<std::pair<power, coeff>> outVec = out.canonical_form();
-    auto [powOut, coeffOut] = outVec.front(); 
-    // printf("powOut : %ld\n", powOut);
-    // printf("pow2 : %ld\n", pow2);
-
-    // printf("coeffOut : %d\n", coeffOut);
-    // printf("coeff2 : %d\n", coeff2);
-    polynomial trial = out + (-1 *in2); 
-    std::vector<std::pair<power, coeff>> trial1 = trial.canonical_form();
-  // auto [powTrial, coeffTrial] = trial1.front(); 
-    // out.print();
-    // printf("-");
-    // in2.print();
-    // printf("=");
-    // trial.print(); 
-    
-
-    if((powOut >= pow2)){ 
-     //   out.print();
-        // printf("in if");
-        return out % in2;
-    }
-   // out.print();
-    return out;
+    remainder = dividend;
+    return remainder;
 }
+
 
 size_t polynomial::find_degree_of(){
     sort(_terms);
