@@ -172,6 +172,9 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     polynomial zero;
     return zero;
 }
+if(other> *this) { 
+    return *this;
+}
 
     std::vector<std::pair<size_t, int>> result;
     
@@ -180,6 +183,8 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
 
     std::vector<std::pair<power, coeff>> can1 = in1.canonical_form();
     std::vector<std::pair<power, coeff>> can2 = in2.canonical_form();
+    sort(can1);
+    sort(can2);
 
     auto [pow1, coeff1] = can1.front(); 
     auto [pow2, coeff2] = can2.front(); 
