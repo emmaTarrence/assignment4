@@ -172,7 +172,8 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
     polynomial zero;
     return zero;
 }
-if(other> *this) { 
+
+if(other > *this) { 
     return *this;
 }
 

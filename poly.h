@@ -79,8 +79,12 @@ public:
             return _terms.front().first > other._terms.front().first;
         }
 
+    
         // If degrees are equal, compare coefficients of the highest-degree term
+        if(_terms.front().second != 0 && other._terms.front().second != 0){
         return _terms.front().second > other._terms.front().second;
+        }
+        return 0;
     }
         bool operator<(const polynomial& other) const {
         // Compare degrees (highest power term)
@@ -89,7 +93,10 @@ public:
         }
 
         // If degrees are equal, compare coefficients of the highest-degree term
-        return _terms.front().second < other._terms.front().second;
+                if(_terms.front().second != 0 && other._terms.front().second != 0){
+        return _terms.front().second > other._terms.front().second;
+        }
+        return 0;
     }
     // polynomial operator%(const int)const; 
     // friend polynomial operator%(int num , const polynomial &poly);
