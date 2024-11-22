@@ -180,7 +180,9 @@ if (this->canonical_form() == std::vector<std::pair<size_t, int>>{{0, 0}}) {
 
     auto [pow1, coeff1] = can1.front(); 
     auto [pow2, coeff2] = can2.front(); 
-    
+    if(pow1 < pow2) { 
+        return *this;
+    }
     if(coeff2 != 0) { 
         size_t result_pow = pow1-pow2;
         int result_coeff = coeff1/coeff2; 
