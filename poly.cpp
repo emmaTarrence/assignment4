@@ -276,7 +276,7 @@ polynomial term_to_subtract(term_vec.begin(), term_vec.end());
         }
 
         dividend = dividend + (scaled_divisor * -1);
-        dividend_terms = dividend.canonical_form(); // Recompute canonical form
+        dividend_terms = dividend.canonical_form(); 
     }
 
     remainder = dividend;
