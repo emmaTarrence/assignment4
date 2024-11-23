@@ -286,8 +286,12 @@ polynomial term_to_subtract(term_vec.begin(), term_vec.end());
 
 size_t polynomial::find_degree_of(){
     sort(_terms);
-    auto [pow, coeff] = _terms[0];
-    return pow;
+    for (const auto& [pow, coeff] : _terms) {
+        if (coeff != 0) {
+            return pow;
+        }
+    }
+    return 0;
 }
 
 std::vector<std::pair<power, coeff>> polynomial::canonical_form() const {

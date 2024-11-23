@@ -5,7 +5,7 @@
 
 int main() {
     using term = std::pair<power, coeff>;
-    std::vector<term> poly_input1 = {{122, 1}, {1, -1}, {0, -1}}; // Represents x^2 - x - 1
+    std::vector<term> poly_input1 = {{3,0}, {1, -1}, {0, -1}}; // Represents x^2 - x - 1
     std::vector<term> poly_input3 = {{3, 2}, {2, 1}, {1, -1}, {0, -1}}; // Represents 2x^3 + x^2 - x - 1
     std::vector<term> poly_input2 = {{1, -1}, {0, -1}}; // Represents x - 1
 
@@ -19,6 +19,8 @@ int main() {
     p1.print();
     polynomial p_mod = p1 % p2; // Expected result: -1 (since x^2 - x - 1 mod (x - 1) = -1)
     p_mod.print();
+
+    printf("\n %ld \n", p1.find_degree_of());
 
     std::cout << "(2x^3 + x^2 - x - 1) % (-x - 1) = ";
     polynomial p_mod1 = p3 % p2; // Expected result: -1 (since 2x^3 + x^2 - x - 1 mod (x - 1) = -1)
